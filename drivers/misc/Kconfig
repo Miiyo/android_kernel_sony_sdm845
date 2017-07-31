@@ -900,6 +900,12 @@ config CXD224X_NFC
 	  device by using I2C. Furthermore, this driver enables the
 	  control of PON using device file.
 
+config FORCE_FAST_CHARGE
+	bool "Force faster charge rate for USB"
+	default y
+	help
+	  This allows users to override default charge rate for USB
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
