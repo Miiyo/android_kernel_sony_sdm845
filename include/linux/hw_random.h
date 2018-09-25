@@ -34,7 +34,8 @@
  *			(either 4 or 8 depending on architecture).
  * @priv:		Private data, for use by the RNG driver.
  * @quality:		Estimation of true entropy in RNG's bitstream
- *			(per mill).
+ *			(in bits of entropy per 1024 bits of input;
+ *			valid values: 1 to 1024, or 0 for unknown).
  */
 struct hwrng {
 	const char *name;
