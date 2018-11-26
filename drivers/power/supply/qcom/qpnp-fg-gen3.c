@@ -7024,12 +7024,7 @@ static int fg_gen3_probe(struct platform_device *pdev)
 	/* Keep BATT_MISSING_IRQ disabled until we require it */
 	vote(chip->batt_miss_irq_en_votable, BATT_MISS_IRQ_VOTER, false, 0);
 
-	rc = fg_debugfs_create(chip);
-	if (rc < 0) {
-		dev_err(chip->dev, "Error in creating debugfs entries, rc:%d\n",
-			rc);
-		goto exit;
-	}
+	fg_debugfs_create(chip);
 
 #if defined(CONFIG_SOMC_CHARGER_EXTENSION)
 	rc = fg_somc_create_sysfs_entries(chip->dev);
