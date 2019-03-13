@@ -43,7 +43,7 @@ static int zram_major;
 #ifdef CONFIG_CRYPTO_LZ4
 static const char *default_compressor = "lz4";
 #else
-static const char *default_compressor = "lzo";
+static const char *default_compressor = "lzo-rle";
 #endif
 
 /* Module params (documentation at end) */
