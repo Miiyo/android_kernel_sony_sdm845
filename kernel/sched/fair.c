@@ -8921,6 +8921,7 @@ static void update_blocked_averages(int cpu)
 		if (se && !skip_blocked_update(se))
 			update_load_avg(se, 0);
 	}
+
 	raw_spin_unlock_irqrestore(&rq->lock, flags);
 }
 
