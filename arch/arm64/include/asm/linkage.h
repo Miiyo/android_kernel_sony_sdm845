@@ -20,4 +20,8 @@
 		SYM_FUNC_END(x);		\
 		SYM_FUNC_END_ALIAS(__pi_##x)
 
+#define SYM_FUNC_END_ALIAS_PI(x)		\
+		SYM_FUNC_END_ALIAS(x);		\
+		SYM_FUNC_END_ALIAS(__pi_##x)
+
 #endif
