@@ -366,7 +366,7 @@ int dsi_phy_hw_v3_0_wait_for_lane_idle(
 				((val & stop_state_mask) == stop_state_mask),
 				sleep_us, timeout_us);
 	if (rc) {
-		pr_err("%s: lanes not in stop state, LANE_STATUS=0x%08x\n",
+		pr_debug("%s: lanes not in stop state, LANE_STATUS=0x%08x\n",
 			__func__, val);
 		return rc;
 	}
@@ -492,7 +492,7 @@ int dsi_phy_hw_timing_val_v3_0(struct dsi_phy_per_lane_cfgs *timing_cfg,
 	int i = 0;
 
 	if (size != DSI_PHY_TIMING_V3_SIZE) {
-		pr_err("Unexpected timing array size %d\n", size);
+		pr_debug("Unexpected timing array size %d\n", size);
 		return -EINVAL;
 	}
 

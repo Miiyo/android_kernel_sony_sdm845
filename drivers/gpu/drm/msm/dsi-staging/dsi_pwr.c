@@ -37,7 +37,7 @@ static int dsi_pwr_parse_supply_node(struct device_node *root,
 
 		rc = of_property_read_string(node, "qcom,supply-name", &st);
 		if (rc) {
-			pr_err("failed to read name, rc = %d\n", rc);
+			pr_debug("failed to read name, rc = %d\n", rc);
 			goto error;
 		}
 
@@ -48,7 +48,7 @@ static int dsi_pwr_parse_supply_node(struct device_node *root,
 		rc = of_property_read_u32(node, "qcom,supply-min-voltage",
 					  &tmp);
 		if (rc) {
-			pr_err("failed to read min voltage, rc = %d\n", rc);
+			pr_debug("failed to read min voltage, rc = %d\n", rc);
 			goto error;
 		}
 		regs->vregs[i].min_voltage = tmp;
@@ -56,7 +56,7 @@ static int dsi_pwr_parse_supply_node(struct device_node *root,
 		rc = of_property_read_u32(node, "qcom,supply-max-voltage",
 					  &tmp);
 		if (rc) {
-			pr_err("failed to read max voltage, rc = %d\n", rc);
+			pr_debug("failed to read max voltage, rc = %d\n", rc);
 			goto error;
 		}
 		regs->vregs[i].max_voltage = tmp;
@@ -64,7 +64,7 @@ static int dsi_pwr_parse_supply_node(struct device_node *root,
 		rc = of_property_read_u32(node, "qcom,supply-enable-load",
 					  &tmp);
 		if (rc) {
-			pr_err("failed to read enable load, rc = %d\n", rc);
+			pr_debug("failed to read enable load, rc = %d\n", rc);
 			goto error;
 		}
 		regs->vregs[i].enable_load = tmp;
@@ -72,7 +72,7 @@ static int dsi_pwr_parse_supply_node(struct device_node *root,
 		rc = of_property_read_u32(node, "qcom,supply-disable-load",
 					  &tmp);
 		if (rc) {
-			pr_err("failed to read disable load, rc = %d\n", rc);
+			pr_debug("failed to read disable load, rc = %d\n", rc);
 			goto error;
 		}
 		regs->vregs[i].disable_load = tmp;
@@ -145,7 +145,7 @@ static int dsi_pwr_enable_vregs(struct dsi_regulator_info *regs, bool enable)
 			rc = regulator_set_load(vreg->vreg,
 						vreg->enable_load);
 			if (rc < 0) {
-				pr_err("Setting optimum mode failed for %s\n",
+				pr_debug("Setting optimum mode failed for %s\n",
 				       vreg->vreg_name);
 				goto error;
 			}
@@ -155,7 +155,7 @@ static int dsi_pwr_enable_vregs(struct dsi_regulator_info *regs, bool enable)
 							   vreg->min_voltage,
 							   vreg->max_voltage);
 				if (rc) {
-					pr_err("Set voltage(%s) fail, rc=%d\n",
+					pr_debug("Set voltage(%s) fail, rc=%d\n",
 						 vreg->vreg_name, rc);
 					goto error_disable_opt_mode;
 				}
@@ -163,7 +163,7 @@ static int dsi_pwr_enable_vregs(struct dsi_regulator_info *regs, bool enable)
 
 			rc = regulator_enable(vreg->vreg);
 			if (rc) {
-				pr_err("enable failed for %s, rc=%d\n",
+				pr_debug("enable failed for %s, rc=%d\n",
 				       vreg->vreg_name, rc);
 				goto error_disable_voltage;
 			}
@@ -232,7 +232,7 @@ int dsi_pwr_of_get_vreg_data(struct device_node *of_node,
 	struct device_node *supply_root_node = NULL;
 
 	if (!of_node || !regs) {
-		pr_err("Bad params\n");
+		pr_debug("Bad params\n");
 		return -EINVAL;
 	}
 
@@ -249,7 +249,7 @@ int dsi_pwr_of_get_vreg_data(struct device_node *of_node,
 
 	regs->count = of_get_available_child_count(supply_root_node);
 	if (regs->count == 0) {
-		pr_err("No vregs defined for %s\n", supply_name);
+		pr_debug("No vregs defined for %s\n", supply_name);
 		return -EINVAL;
 	}
 
@@ -261,7 +261,7 @@ int dsi_pwr_of_get_vreg_data(struct device_node *of_node,
 
 	rc = dsi_pwr_parse_supply_node(supply_root_node, regs);
 	if (rc) {
-		pr_err("failed to parse supply node for %s, rc = %d\n",
+		pr_debug("failed to parse supply node for %s, rc = %d\n",
 			supply_name, rc);
 
 		kfree(regs->vregs);
@@ -290,7 +290,7 @@ int dsi_pwr_get_dt_vreg_data(struct device *dev,
 	struct device_node *supply_root_node = NULL;
 
 	if (!dev || !regs) {
-		pr_err("Bad params\n");
+		pr_debug("Bad params\n");
 		return -EINVAL;
 	}
 
@@ -310,7 +310,7 @@ int dsi_pwr_get_dt_vreg_data(struct device *dev,
 		regs->count++;
 
 	if (regs->count == 0) {
-		pr_err("No vregs defined for %s\n", supply_name);
+		pr_debug("No vregs defined for %s\n", supply_name);
 		return -EINVAL;
 	}
 
@@ -323,7 +323,7 @@ int dsi_pwr_get_dt_vreg_data(struct device *dev,
 
 	rc = dsi_pwr_parse_supply_node(supply_root_node, regs);
 	if (rc) {
-		pr_err("failed to parse supply node for %s, rc = %d\n",
+		pr_debug("failed to parse supply node for %s, rc = %d\n",
 		       supply_name, rc);
 		devm_kfree(dev, regs->vregs);
 		regs->vregs = NULL;
@@ -350,7 +350,7 @@ int dsi_pwr_enable_regulator(struct dsi_regulator_info *regs, bool enable)
 #endif /* CONFIG_DRM_SDE_SPECIFIC_PANEL */
 
 	if (!regs->vregs) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return -EINVAL;
 	}
 
@@ -358,19 +358,19 @@ int dsi_pwr_enable_regulator(struct dsi_regulator_info *regs, bool enable)
 		if (regs->refcount == 0) {
 			rc = dsi_pwr_enable_vregs(regs, true);
 			if (rc)
-				pr_err("failed to enable regulators\n");
+				pr_debug("failed to enable regulators\n");
 		}
 		regs->refcount++;
 	} else {
 		if (regs->refcount == 0) {
-			pr_err("Unbalanced regulator off:%s\n",
+			pr_debug("Unbalanced regulator off:%s\n",
 					regs->vregs->vreg_name);
 		} else {
 			regs->refcount--;
 			if (regs->refcount == 0) {
 				rc = dsi_pwr_enable_vregs(regs, false);
 				if (rc)
-					pr_err("failed to disable vregs\n");
+					pr_debug("failed to disable vregs\n");
 			}
 		}
 	}
