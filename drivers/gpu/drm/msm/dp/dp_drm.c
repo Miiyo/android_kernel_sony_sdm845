@@ -191,7 +191,7 @@ static int dp_bridge_attach(struct drm_bridge *dp_bridge)
 	struct dp_bridge *bridge = to_dp_bridge(dp_bridge);
 
 	if (!dp_bridge) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return -EINVAL;
 	}
 
@@ -207,7 +207,7 @@ static void dp_bridge_pre_enable(struct drm_bridge *drm_bridge)
 	struct dp_display *dp;
 
 	if (!drm_bridge) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return;
 	}
 
@@ -217,21 +217,21 @@ static void dp_bridge_pre_enable(struct drm_bridge *drm_bridge)
 	/* By this point mode should have been validated through mode_fixup */
 	rc = dp->set_mode(dp, &bridge->dp_mode);
 	if (rc) {
-		pr_err("[%d] failed to perform a mode set, rc=%d\n",
+		pr_debug("[%d] failed to perform a mode set, rc=%d\n",
 		       bridge->id, rc);
 		return;
 	}
 
 	rc = dp->prepare(dp);
 	if (rc) {
-		pr_err("[%d] DP display prepare failed, rc=%d\n",
+		pr_debug("[%d] DP display prepare failed, rc=%d\n",
 		       bridge->id, rc);
 		return;
 	}
 
 	rc = dp->enable(dp);
 	if (rc) {
-		pr_err("[%d] DP display enable failed, rc=%d\n",
+		pr_debug("[%d] DP display enable failed, rc=%d\n",
 		       bridge->id, rc);
 		dp->unprepare(dp);
 	}
@@ -245,7 +245,7 @@ static void dp_bridge_enable(struct drm_bridge *drm_bridge)
 	struct dp_display *dp;
 
 	if (!drm_bridge) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return;
 	}
 
@@ -254,7 +254,7 @@ static void dp_bridge_enable(struct drm_bridge *drm_bridge)
 
 	rc = dp->post_enable(dp);
 	if (rc)
-		pr_err("[%d] DP display post enable failed, rc=%d\n",
+		pr_debug("[%d] DP display post enable failed, rc=%d\n",
 		       bridge->id, rc);
 }
 
@@ -265,7 +265,7 @@ static void dp_bridge_disable(struct drm_bridge *drm_bridge)
 	struct dp_display *dp;
 
 	if (!drm_bridge) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return;
 	}
 
@@ -273,7 +273,7 @@ static void dp_bridge_disable(struct drm_bridge *drm_bridge)
 	dp = bridge->display;
 
 	if (!dp) {
-		pr_err("dp is null\n");
+		pr_debug("dp is null\n");
 		return;
 	}
 
@@ -282,7 +282,7 @@ static void dp_bridge_disable(struct drm_bridge *drm_bridge)
 
 	rc = dp->pre_disable(dp);
 	if (rc) {
-		pr_err("[%d] DP display pre disable failed, rc=%d\n",
+		pr_debug("[%d] DP display pre disable failed, rc=%d\n",
 		       bridge->id, rc);
 	}
 }
@@ -294,7 +294,7 @@ static void dp_bridge_post_disable(struct drm_bridge *drm_bridge)
 	struct dp_display *dp;
 
 	if (!drm_bridge) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return;
 	}
 
@@ -303,14 +303,14 @@ static void dp_bridge_post_disable(struct drm_bridge *drm_bridge)
 
 	rc = dp->disable(dp);
 	if (rc) {
-		pr_err("[%d] DP display disable failed, rc=%d\n",
+		pr_debug("[%d] DP display disable failed, rc=%d\n",
 		       bridge->id, rc);
 		return;
 	}
 
 	rc = dp->unprepare(dp);
 	if (rc) {
-		pr_err("[%d] DP display unprepare failed, rc=%d\n",
+		pr_debug("[%d] DP display unprepare failed, rc=%d\n",
 		       bridge->id, rc);
 		return;
 	}
@@ -324,7 +324,7 @@ static void dp_bridge_mode_set(struct drm_bridge *drm_bridge,
 	struct dp_display *dp;
 
 	if (!drm_bridge || !mode || !adjusted_mode) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		return;
 	}
 
@@ -345,7 +345,7 @@ static bool dp_bridge_mode_fixup(struct drm_bridge *drm_bridge,
 	struct dp_display *dp;
 
 	if (!drm_bridge || !mode || !adjusted_mode) {
-		pr_err("Invalid params\n");
+		pr_debug("Invalid params\n");
 		ret = false;
 		goto end;
 	}
@@ -384,7 +384,7 @@ int dp_connector_config_hdr(void *display,
 	struct dp_display *dp = display;
 
 	if (!display || !c_state) {
-		pr_err("invalid params\n");
+		pr_debug("invalid params\n");
 		return -EINVAL;
 	}
 
@@ -416,7 +416,7 @@ int dp_connector_get_mode_info(const struct drm_display_mode *drm_mode,
 	struct msm_display_topology *topology;
 
 	if (!drm_mode || !mode_info || !max_mixer_width) {
-		pr_err("invalid params\n");
+		pr_debug("invalid params\n");
 		return -EINVAL;
 	}
 
@@ -438,7 +438,7 @@ int dp_connector_get_info(struct msm_display_info *info, void *data)
 	struct dp_display *display = data;
 
 	if (!info || !display) {
-		pr_err("invalid params\n");
+		pr_debug("invalid params\n");
 		return -EINVAL;
 	}
 
@@ -568,7 +568,7 @@ enum drm_connector_status dp_connector_detect(struct drm_connector *conn,
 	memset(&info, 0x0, sizeof(info));
 	rc = dp_connector_get_info(&info, display);
 	if (rc) {
-		pr_err("failed to get display info, rc=%d\n", rc);
+		pr_debug("failed to get display info, rc=%d\n", rc);
 		return connector_status_disconnected;
 	}
 
@@ -589,7 +589,7 @@ void dp_connector_post_open(void *display)
 	struct dp_display *dp;
 
 	if (!display) {
-		pr_err("invalid input\n");
+		pr_debug("invalid input\n");
 		return;
 	}
 
@@ -620,14 +620,14 @@ int dp_connector_get_modes(struct drm_connector *connector,
 	if (dp->is_connected) {
 		rc = dp->get_modes(dp, dp_mode);
 		if (!rc)
-			pr_err("failed to get DP sink modes, rc=%d\n", rc);
+			pr_debug("failed to get DP sink modes, rc=%d\n", rc);
 
 		if (dp_mode->timing.pixel_clk_khz) { /* valid DP mode */
 			memset(&drm_mode, 0x0, sizeof(drm_mode));
 			convert_to_drm_mode(dp_mode, &drm_mode);
 			m = drm_mode_duplicate(connector->dev, &drm_mode);
 			if (!m) {
-				pr_err("failed to add mode %ux%u\n",
+				pr_debug("failed to add mode %ux%u\n",
 				       drm_mode.hdisplay,
 				       drm_mode.vdisplay);
 				kfree(dp_mode);
@@ -638,7 +638,7 @@ int dp_connector_get_modes(struct drm_connector *connector,
 			drm_mode_probed_add(connector, m);
 		}
 	} else {
-		pr_err("No sink connected\n");
+		pr_debug("No sink connected\n");
 	}
 	kfree(dp_mode);
 
@@ -681,13 +681,13 @@ int dp_drm_bridge_init(void *data, struct drm_encoder *encoder)
 
 	rc = drm_bridge_attach(dev, &bridge->base);
 	if (rc) {
-		pr_err("failed to attach bridge, rc=%d\n", rc);
+		pr_debug("failed to attach bridge, rc=%d\n", rc);
 		goto error_free_bridge;
 	}
 
 	rc = display->request_irq(display);
 	if (rc) {
-		pr_err("request_irq failed, rc=%d\n", rc);
+		pr_debug("request_irq failed, rc=%d\n", rc);
 		goto error_free_bridge;
 	}
 
@@ -723,7 +723,7 @@ enum drm_mode_status dp_connector_mode_valid(struct drm_connector *connector,
 	u32 rate_ratio = RGB_24BPP_TMDS_CHAR_RATE_RATIO;
 
 	if (!mode || !display) {
-		pr_err("invalid params\n");
+		pr_debug("invalid params\n");
 		return MODE_ERROR;
 	}
 
