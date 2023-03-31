@@ -7113,7 +7113,7 @@ static int afe_get_cal_hw_delay(int32_t path,
 	hw_delay_info = &((struct audio_cal_info_hw_delay *)
 		cal_block->cal_info)->data;
 	if (hw_delay_info->num_entries > MAX_HW_DELAY_ENTRIES) {
-		pr_err("%s: invalid num entries: %d\n",
+		pr_debug("%s: invalid num entries: %d\n",
 		       __func__, hw_delay_info->num_entries);
 		ret = -EINVAL;
 		goto unlock;
