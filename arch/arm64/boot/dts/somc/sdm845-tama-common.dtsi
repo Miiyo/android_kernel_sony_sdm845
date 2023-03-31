@@ -3205,58 +3205,22 @@
 	};
 
 	ibat-high {
-		trips {
-			low-ibat {
-				temperature = <4200>;
-				hysteresis = <200>;
-				type = "passive";
-			};
-		};
+		status = "disabled";
 	};
 	ibat-vhigh {
-		trips {
-			ibat_vhigh {
-				temperature = <4300>;
-				hysteresis = <100>;
-				type = "passive";
-			};
-		};
+		status = "disabled";
 	};
-	vbat {
-		trips {
-			low-vbat {
-				temperature = <3300>;
-				hysteresis = <100>;
-				type = "passive";
-			};
-		};
+	vbat_adc {
+		status = "disabled";
 	};
 	vbat_low {
-		trips {
-			low-vbat {
-				temperature = <3200>;
-				hysteresis = <0>;
-				type = "passive";
-			};
-		};
+		status = "disabled";
 	};
 	vbat_too_low {
-		trips {
-			low-vbat {
-				temperature = <2400>;
-				hysteresis = <0>;
-				type = "passive";
-			};
-		};
-	};
-	soc {
-		trips {
-			low-soc {
-				temperature = <5>;
-				hysteresis = <0>;
-				type = "passive";
-			};
-		};
+		status = "disabled";
+        };
+        soc  {
+                status = "disabled";
 	};
 };
 
