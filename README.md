@@ -1,4 +1,5 @@
-# Miyo Toku Kernel for the Tama Platform
+# MiyoToku Kernel
+# Tama
 
 ![MiyoToku Kernel](https://raw.githubusercontent.com/ekkusa/ekkusa/master/tokutama.png)
 
