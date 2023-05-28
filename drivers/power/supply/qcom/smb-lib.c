@@ -2665,7 +2665,7 @@ int smblib_get_prop_real_temp(struct smb_charger *chg,
 	if (chg->real_temp_use_aux) {
 		rc = smblib_get_prop_skin_temp(chg, &pval);
 		if (rc < 0) {
-			smblib_err(chg, "Couldn't get skin temp rc=%d\n", rc);
+			pr_debug("Couldn't get skin temp rc=%d\n", rc);
 		} else {
 			skin_temp = pval.intval;
 			corrected_skin_temp =
@@ -6836,7 +6836,7 @@ static void smblib_somc_jeita_work(struct work_struct *work)
 	if (chg->jeita_use_aux) {
 		rc = smblib_get_prop_skin_temp(chg, &pval);
 		if (rc < 0) {
-			smblib_err(chg, "Couldn't get skin temp rc=%d\n", rc);
+			pr_debug("Couldn't get skin temp rc=%d\n", rc);
 			skin_temp_failed = true;
 		}
 		skin_temp = pval.intval;
