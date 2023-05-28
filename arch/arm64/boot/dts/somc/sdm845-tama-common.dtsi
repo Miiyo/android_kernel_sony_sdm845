@@ -3126,8 +3126,8 @@
 	xo-therm-adc {
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 			};
 		};
 	};
@@ -3135,8 +3135,8 @@
 	msm-therm-adc {
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 			};
 		};
 	};
@@ -3149,8 +3149,8 @@
 
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 				type = "passive";
 			};
 		};
@@ -3159,8 +3159,8 @@
 	pa-therm1-adc {
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 			};
 		};
 	};
@@ -3173,8 +3173,8 @@
 
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 				type = "passive";
 			};
 		};
@@ -3183,8 +3183,8 @@
 	quiet-therm-adc {
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 			};
 		};
 	};
@@ -3197,8 +3197,8 @@
 
 		trips {
 			active-config0 {
-				temperature = <2147483647>;
-				hysteresis = <(-1)>;
+				temperature = <125000>;
+				hysteresis = <10000>;
 				type = "passive";
 			};
 		};
@@ -3207,7 +3207,7 @@
 	ibat-high {
 		trips {
 			low-ibat {
-				temperature = <4200>;
+				temperature = <5000>;
 				hysteresis = <200>;
 				type = "passive";
 			};
@@ -3216,8 +3216,8 @@
 	ibat-vhigh {
 		trips {
 			ibat_vhigh {
-				temperature = <4300>;
-				hysteresis = <100>;
+				temperature = <5000>;
+				hysteresis = <200>;
 				type = "passive";
 			};
 		};
@@ -3235,7 +3235,7 @@
 		trips {
 			low-vbat {
 				temperature = <3200>;
-				hysteresis = <0>;
+				hysteresis = <100>;
 				type = "passive";
 			};
 		};
@@ -3244,7 +3244,7 @@
 		trips {
 			low-vbat {
 				temperature = <2400>;
-				hysteresis = <0>;
+				hysteresis = <100>;
 				type = "passive";
 			};
 		};
