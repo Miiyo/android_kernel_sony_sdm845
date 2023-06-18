@@ -1,7 +1,6 @@
-# MiyoToku Kernel
-# Tama
+# Toku Kernel for Sony Tama
 
-![MiyoToku Kernel](https://raw.githubusercontent.com/ekkusa/ekkusa/master/tokutama.png)
+![MiyoToku Kernel](https://raw.githubusercontent.com/ekkusa/ekkusa/master/TokuSewen.jpg)
 
 ## Device specifications
 
