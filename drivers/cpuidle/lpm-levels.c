@@ -90,6 +90,9 @@ static bool suspend_in_progress;
 static struct hrtimer lpm_hrtimer;
 static DEFINE_PER_CPU(struct hrtimer, histtimer);
 static DEFINE_PER_CPU(struct hrtimer, biastimer);
+static struct lpm_debug *lpm_debug;
+static phys_addr_t lpm_debug_phys;
+static const int num_dbg_elements = 0x100;
 
 static void cluster_unprepare(struct lpm_cluster *cluster,
 		const struct cpumask *cpu, int child_idx, bool from_idle,
