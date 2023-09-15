@@ -1915,7 +1915,7 @@ static int cam_icp_alloc_secheap_mem(struct cam_mem_mgr_memory_desc *secheap)
 		CAM_SMMU_REGION_SECHEAP,
 		&out);
 	if (rc) {
-		CAM_ERR(CAM_ICP, "Unable to reserve secheap memory");
+		CAM_DBG(CAM_ICP, "Unable to reserve secheap memory");
 		return rc;
 	}
 
